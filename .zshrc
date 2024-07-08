@@ -69,6 +69,7 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 # Initialize apps
 eval "$(zoxide init --cmd cd zsh)"
 
+
 # Set up fzf key bindings and fuzzy completion
 if [ -f ~/.fzf.zsh ]; then
 	source ~/.fzf.zsh
