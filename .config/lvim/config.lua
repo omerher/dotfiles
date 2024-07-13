@@ -17,3 +17,5 @@ lvim.plugins = {
     lazy = false,
   }
 }
+
+lvim.keys.normal_mode[";"] = ":"

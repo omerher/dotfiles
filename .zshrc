@@ -59,6 +59,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 alias pip="pip3"
 alias vim="lvim"
+alias ls="lsd -lFa"
 
 
 # Path
