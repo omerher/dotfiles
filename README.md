@@ -5,3 +5,4 @@
 - [fzf](https://github.com/junegunn/fzf)
 - [tpm](https://github.com/tmux-plugins/tpm)
     - `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+- [lsd](https://github.com/lsd-rs/lsd)
