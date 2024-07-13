@@ -91,4 +91,5 @@ fi
 
 # Misc
 bindkey '^ ' autosuggest-accept
+bindkey '^Y' clear-screen
 unset ZSH_AUTOSUGGEST_USE_ASYNC
