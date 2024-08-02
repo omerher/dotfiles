@@ -6,3 +6,5 @@
 - [tpm](https://github.com/tmux-plugins/tpm)
     - `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 - [lsd](https://github.com/lsd-rs/lsd)
+- [xclip](https://github.com/astrand/xclip)
+    - Need to install `VcXsrv` on Windows, and run `ssh` with `-Y`
