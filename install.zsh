@@ -2,7 +2,7 @@
 # WIP
 
 # create backups of all configs
-FOLDERS_TO_EXCLUDE=".git"
+FOLDERS_TO_EXCLUDE=".git sources"
 FILES_TO_EXCLUDE="README.md install.zsh"
 
 # Convert space-separated lists into arrays

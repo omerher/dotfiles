@@ -53,32 +53,43 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# ---- aliases ----
 alias pip="pip3"
 alias vim="lvim"
 alias ls="lsd"
 
-
-# Path
+# ---- path ----
 export PATH="$PATH:/$HOME/.local/bin"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
-
-# Initialize apps
+# ---- zoxide ----
 eval "$(zoxide init --cmd cd zsh)"
 
-
-# Set up fzf key bindings and fuzzy completion
+# ---- fzf ----
 if [ -f ~/.fzf.zsh ]; then
 	source ~/.fzf.zsh
 else;
 	eval "$(fzf --zsh)"
 fi
 
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
+# ---- p10k ----
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+
+# ---- bat ----
+export BAT_THEME="Dracula"
+
 
 
 # OS specific commands
@@ -92,5 +103,5 @@ fi
 
 # Misc
 bindkey '^ ' autosuggest-accept
-bindkey '^Y' clear-screen
 unset ZSH_AUTOSUGGEST_USE_ASYNC
+
