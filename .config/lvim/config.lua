@@ -17,9 +17,6 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 
 lvim.plugins = {
-  { "christoomey/vim-tmux-navigator",
-    lazy = false,
-  },
   {
     "mg979/vim-visual-multi"
   }

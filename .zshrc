@@ -58,12 +58,15 @@ alias pip="pip3"
 alias vim="lvim"
 alias ls="lsd"
 
+
 # ---- path ----
 export PATH="$PATH:/$HOME/.local/bin"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
+
 # ---- zoxide ----
 eval "$(zoxide init --cmd cd zsh)"
+
 
 # ---- fzf ----
 if [ -f ~/.fzf.zsh ]; then
@@ -71,6 +74,9 @@ if [ -f ~/.fzf.zsh ]; then
 else;
 	eval "$(fzf --zsh)"
 fi
+
+# Dracula theme
+export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -84,15 +90,34 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
+export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
+export FZF_ALT_C_OPTS="--preview 'lsd --tree --color=always {} | head -200'"
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'lsd --tree --color=always {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
+  esac
+}
+
 # ---- p10k ----
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
+
 # ---- bat ----
 export BAT_THEME="Dracula"
+alias cat="bat"
 
 
-
-# OS specific commands
+# ---- OS specific ----
 if [ "$(uname)" = "Darwin" ]; then # Mac OS X only
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -101,7 +126,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then # Linux Only
 fi
 
 
-# Misc
+# ---- misc ----
 bindkey '^ ' autosuggest-accept
 unset ZSH_AUTOSUGGEST_USE_ASYNC
 
