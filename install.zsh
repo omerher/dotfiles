@@ -51,21 +51,19 @@ fi
 
 
 # ---- oh-my-zsh plugins ----
-if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
+download_oh_my_zsh_plugin () {
+    repo_name=$1
+    github_user="${2:-zsh-users}"
 
-if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-fi
+    if [[ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$repo_name" ]]; then
+        git clone "https://github.com/$github_user/$repo_name" "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$repo_name"
+    fi
+}
 
-if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
-  git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
-fi
-
-if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
-  git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
-fi
+download_oh_my_zsh_plugin zsh-autosuggestions
+download_oh_my_zsh_plugin zsh-syntax-highlighting
+download_oh_my_zsh_plugin zsh-completions
+download_oh_my_zsh_plugin fzf-tab Aloxaf
 
 
 # ---- Install packages
