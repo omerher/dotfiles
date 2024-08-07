@@ -1,7 +1,17 @@
 #!/bin/zsh
 # WIP
 
+
+# ---- OS specific ----
+if [ "$(uname)" = "Darwin" ]; then # Mac OS X only
+  os_name="MacOS"
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then # Linux Only
+  os_name="Linux"
+fi
+
+
 # ---- Create backups of all configs ----
+# TODO - change this to use .stow-ignore-files
 FOLDERS_TO_EXCLUDE=".git sources"
 FILES_TO_EXCLUDE="README.md install.zsh"
 
@@ -21,9 +31,9 @@ done
 eval $find_command | while read file; do
   full_path="$HOME/${file#./}"
   if [[ -f "$full_path" ]]; then
-    backup_path = "$full_path.bck"
+    backup_path="$full_path.bck"
     if [[ -f "$backup_path" ]]; then
-      temp_path = "/tmp/$(basename $backup_path).$(openssl rand -hex 3)"
+      temp_path="/tmp/$(basename $backup_path).$(openssl rand -hex 3)"
       cp "$backup_path $temp_path"
       echo "[INFO] existing backup file for $backup_path found, copying to $temp_path"
     fi
@@ -40,8 +50,13 @@ else
 fi
 
 
-# ---- oh-my-zsh plugins ----
-if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# ---- Install packages
+packages="jq"
+if [[ "$os_name" = "Linux" ]]; then
+  install_command="sudo apt install"
+elif [[ "$os_name" = "MacOS" ]]; then
+  install_command="brew install"
 fi
+
+eval "$install_command $packages"
 

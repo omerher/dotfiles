@@ -19,6 +19,9 @@ vim.opt.scrolloff = 8
 lvim.plugins = {
   {
     "mg979/vim-visual-multi"
+  },
+  {
+    "norcalli/nvim-colorizer.lua"
   }
 }
 
@@ -26,3 +29,4 @@ lvim.keys.normal_mode[";"] = ":"
 lvim.keys.visual_mode["J"] = ":m '>+1<CR>gv=gv"
 lvim.keys.visual_mode["K"] = ":m '<-2<CR>gv=gv"
 
+require'colorizer'.setup()

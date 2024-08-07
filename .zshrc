@@ -42,7 +42,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git tmux zsh-autosuggestions zsh-syntax-highlighting fzf-tab colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -52,6 +52,15 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
+
+
+# ---- OS specific ----
+if [ "$(uname)" = "Darwin" ]; then # Mac OS X only
+  os_name="MacOS"
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then # Linux Only
+  os_name="Linux"
+fi
+
 
 # ---- aliases ----
 alias pip="pip3"
@@ -76,7 +85,18 @@ else;
 fi
 
 # Dracula theme
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+#export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 \
+#--color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 \
+#--color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 \
+#--color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
+# Catppuccin theme
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--multi"
 
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -108,25 +128,34 @@ _fzf_comprun() {
   esac
 }
 
+
+# ---- fzf-tab ----
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with lsd when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+
 # ---- p10k ----
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
 
 # ---- bat ----
-export BAT_THEME="Dracula"
+export BAT_THEME="Catppuccin Mocha"
 alias cat="bat"
-
-
-# ---- OS specific ----
-if [ "$(uname)" = "Darwin" ]; then # Mac OS X only
-  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then # Linux Only
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
 
 
 # ---- misc ----
 bindkey '^ ' autosuggest-accept
 unset ZSH_AUTOSUGGEST_USE_ASYNC
+setopt sharehistory
 
