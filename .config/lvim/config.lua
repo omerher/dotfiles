@@ -25,7 +25,6 @@ lvim.plugins = {
   }
 }
 
-lvim.keys.normal_mode[";"] = ":"
 lvim.keys.visual_mode["J"] = ":m '>+1<CR>gv=gv"
 lvim.keys.visual_mode["K"] = ":m '<-2<CR>gv=gv"
 

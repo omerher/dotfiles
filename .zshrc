@@ -64,7 +64,7 @@ fi
 
 # ---- aliases ----
 alias pip="pip3"
-alias vim="lvim"
+alias vim="nvim"
 alias ls="lsd"
 
 
