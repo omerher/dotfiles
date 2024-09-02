@@ -16,5 +16,4 @@
 - [xclip](https://github.com/astrand/xclip)
     - Need to install `VcXsrv` (X server) on Windows, and run `ssh` with `-Y`
 - [neovim](https://github.com/neovim/neovim)
-- [lvim](https://www.lunarvim.org/)
 

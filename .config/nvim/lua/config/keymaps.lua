@@ -30,12 +30,38 @@ local lazyterm = function()
   LazyVim.terminal(nil, { cwd = LazyVim.root() })
 end
 
+map("n", "<C-t>", lazyterm, { desc = "Floating Terminal" })
+map("t", "<C-t>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+
+-- Remove current toggle terminal bindings
 del("n", "<C-/>")
 del("n", "<C-_>")
-map("n", "<C-t>", lazyterm, { desc = "Floating Terminal" })
+del("t", "<C-/>")
+del("t", "<C-_>")
 
+-- Allow CTRL+hjkl in fzf in terminal
 del("t", "<C-h>")
 del("t", "<C-j>")
 del("t", "<C-k>")
 del("t", "<C-l>")
-map("t", "<C-t>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+
+-- Copied from neovim/runtime/lua/vim/_defaults.lua
+do
+  local operator_rhs = function()
+    return require("vim._comment").operator()
+  end
+  map({ "n", "x" }, "<C-_>", operator_rhs, { expr = true, desc = "Toggle comment" })
+  map({ "n", "x" }, "<C-/>", operator_rhs, { expr = true, desc = "Toggle comment" })
+
+  local line_rhs = function()
+    return require("vim._comment").operator() .. "_"
+  end
+  map("n", "<C-_>", line_rhs, { expr = true, desc = "Toggle comment line" })
+  map("n", "<C-/>", line_rhs, { expr = true, desc = "Toggle comment line" })
+
+  local textobject_rhs = function()
+    require("vim._comment").textobject()
+  end
+  map({ "o" }, "<C-_>", textobject_rhs, { desc = "Comment textobject" })
+  map({ "o" }, "<C-/>", textobject_rhs, { desc = "Comment textobject" })
+end
