@@ -62,16 +62,11 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then # Linux Only
 fi
 
 
-# ---- sourcing ----
-if [[ -f "~/.secrets.zsh" ]]; then
-  source ~/.secrets.zsh
-fi
-
-
 # ---- aliases ----
 alias pip="pip3"
 alias vim="nvim"
 alias ls="lsd"
+alias sudo="sudo " # this is used so sudo has the same aliases
 
 
 # ---- path ----

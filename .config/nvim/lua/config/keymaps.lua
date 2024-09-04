@@ -50,18 +50,18 @@ do
   local operator_rhs = function()
     return require("vim._comment").operator()
   end
-  map({ "n", "x" }, "<C-_>", operator_rhs, { expr = true, desc = "Toggle comment" })
-  map({ "n", "x" }, "<C-/>", operator_rhs, { expr = true, desc = "Toggle comment" })
+  map({ "n", "x" }, "<C-_>", operator_rhs, { expr = true, desc = "Toggle Comment" })
+  map({ "n", "x" }, "<C-/>", operator_rhs, { expr = true, desc = "Toggle Comment" })
 
   local line_rhs = function()
     return require("vim._comment").operator() .. "_"
   end
-  map("n", "<C-_>", line_rhs, { expr = true, desc = "Toggle comment line" })
-  map("n", "<C-/>", line_rhs, { expr = true, desc = "Toggle comment line" })
+  map("n", "<C-_>", line_rhs, { expr = true, desc = "Toggle Comment Line" })
+  map("n", "<C-/>", line_rhs, { expr = true, desc = "Toggle Comment Line" })
 
   local textobject_rhs = function()
     require("vim._comment").textobject()
   end
-  map({ "o" }, "<C-_>", textobject_rhs, { desc = "Comment textobject" })
-  map({ "o" }, "<C-/>", textobject_rhs, { desc = "Comment textobject" })
+  map({ "o" }, "<C-_>", textobject_rhs, { desc = "Comment Textobject" })
+  map({ "o" }, "<C-/>", textobject_rhs, { desc = "Comment Textobject" })
 end
