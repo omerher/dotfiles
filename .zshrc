@@ -159,4 +159,15 @@ alias cat="bat"
 bindkey '^ ' autosuggest-accept
 unset ZSH_AUTOSUGGEST_USE_ASYNC
 setopt sharehistory
+unsetopt HIST_VERIFY
 
+
+# sources
+local sources_dir="$HOME/.sources/"
+if [ -d "$sources_dir" ]; then
+    for file in "$sources_dir"/*; do
+        if [ -f "$file" ]; then
+            source "$file"
+        fi
+    done
+fi
