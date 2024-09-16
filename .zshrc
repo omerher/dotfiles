@@ -1,3 +1,7 @@
+# ---- display ----
+pokemon-colorscripts --no-title -r 1 | fastfetch -c neofetch.jsonc --file-raw -
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -162,7 +166,7 @@ setopt sharehistory
 unsetopt HIST_VERIFY
 
 
-# sources
+# ---- sources ----
 local sources_dir="$HOME/.sources/"
 if [ -d "$sources_dir" ]; then
     for file in "$sources_dir"/*; do
