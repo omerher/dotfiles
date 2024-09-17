@@ -37,3 +37,5 @@ download_oh_my_zsh_plugin fzf-tab Aloxaf
 # ---- Refresh bat themes
 bat cache --build
 
+# ---- Install pokemon-color
+/bin/zsh ../sources/pokemon-colorscripts/install.sh
