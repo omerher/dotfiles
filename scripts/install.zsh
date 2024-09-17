@@ -34,13 +34,6 @@ download_oh_my_zsh_plugin zsh-completions
 download_oh_my_zsh_plugin fzf-tab Aloxaf
 
 
-# ---- Install packages
-packages="jq fd lsd zoxide"
-if [[ "$os_name" = "Linux" ]]; then
-  install_command="sudo apt install"
-elif [[ "$os_name" = "MacOS" ]]; then
-  install_command="brew install"
-fi
-
-eval "$install_command $packages"
+# ---- Refresh bat themes
+bat cache --build
 

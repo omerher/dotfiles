@@ -1,5 +1,5 @@
 # ---- display ----
-pokemon-colorscripts --no-title -r 1 | fastfetch -c neofetch.jsonc --file-raw -
+pokemon-colorscripts --no-title -r 1 | fastfetch -c paleofetch.jsonc --file-raw -
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
