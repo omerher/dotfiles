@@ -1,7 +1,6 @@
 #!/bin/zsh
 # WIP
 
-
 # ---- OS specific ----
 if [ "$(uname)" = "Darwin" ]; then # Mac OS X only
   os_name="MacOS"
@@ -37,5 +36,6 @@ download_oh_my_zsh_plugin fzf-tab Aloxaf
 # ---- Refresh bat themes
 bat cache --build
 
+
 # ---- Install pokemon-color
-/bin/zsh ../sources/pokemon-colorscripts/install.sh
+/bin/zsh ./sources/pokemon-colorscripts/install.sh
