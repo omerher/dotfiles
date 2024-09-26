@@ -71,6 +71,7 @@ alias pip="pip3"
 alias vim="nvim"
 alias ls="lsd"
 alias sudo="sudo " # this is used so sudo has the same aliases
+alias lg="lazygit"
 
 
 # ---- path ----
