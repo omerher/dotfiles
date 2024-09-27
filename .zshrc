@@ -162,6 +162,7 @@ alias cat="bat"
 
 # ---- misc ----
 bindkey '^ ' autosuggest-accept
+bindkey -s '^f' "tmux-sessionizer\n"
 unset ZSH_AUTOSUGGEST_USE_ASYNC
 setopt sharehistory
 unsetopt HIST_VERIFY
