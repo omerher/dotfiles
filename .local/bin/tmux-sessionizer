@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+
+tmux_running=$(pgrep tmux)
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    if [[ -n $tmux_running ]]; then
+        tmux_sessions=$(tmux list-sessions -F \#S 2>/dev/null | sed -e 's/^/ /')\\n
+    else
+        tmux_sessions=""
+    fi
+
+    projects=$(find ~/projects/group1/ ~/projects/group2/ -mindepth 1 -maxdepth 1 -type d | sed -e 's/^/ /')\\n
+    zoxide_recent=$(zoxide query -l | head -n 20 | sed -e 's/^/󰁯 /')\\n
+
+    selected=$(echo "$tmux_sessions$projects$zoxide_recent" | fzf | awk '{print $2}')
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+
+if ! tmux has-session -t=$selected_name 2>/dev/null; then
+    if [[ -z $TMUX ]]; then
+        tmux new-session -s $selected_name -c $selected
+        exit 0
+    fi
+
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+if [[ -z $TMUX ]]; then
+    tmux attach-session -t $selected_name
+    exit 0
+fi
+tmux switch-client -t $selected_name
