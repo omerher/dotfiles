@@ -168,7 +168,7 @@ unsetopt HIST_VERIFY
 
 
 # ---- sources ----
-local sources_dir="$HOME/.sources/"
+local sources_dir="$HOME/.scripts/"
 if [ -d "$sources_dir" ]; then
     for file in "$sources_dir"/*; do
         if [ -f "$file" ]; then
