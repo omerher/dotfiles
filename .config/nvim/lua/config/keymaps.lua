@@ -45,6 +45,9 @@ del("t", "<C-j>")
 del("t", "<C-k>")
 del("t", "<C-l>")
 
+map("i", "jk", "<Esc>")
+map("i", "kj", "<Esc>")
+
 -- Worktrees
 map("n", "<leader>gw", function()
   require("telescope").extensions.git_worktree.git_worktree()
