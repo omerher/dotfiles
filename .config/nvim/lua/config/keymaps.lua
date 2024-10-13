@@ -45,6 +45,14 @@ del("t", "<C-j>")
 del("t", "<C-k>")
 del("t", "<C-l>")
 
+-- Worktrees
+map("n", "<leader>gw", function()
+  require("telescope").extensions.git_worktree.git_worktree()
+end, { desc = "List Worktrees" })
+map("n", "<leader>gW", function()
+  require("telescope").extensions.git_worktree.create_git_worktree()
+end, { desc = "Create worktree" })
+
 -- Copied from neovim/runtime/lua/vim/_defaults.lua
 do
   local operator_rhs = function()
