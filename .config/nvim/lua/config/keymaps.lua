@@ -7,10 +7,10 @@ local del = vim.keymap.del
 local wk = require("which-key")
 
 -- Move text more effeciently
-map("n", "J", "<cmd>m .+1<cr>==", { desc = "Move Down" })
-map("n", "K", "<cmd>m .-2<cr>==", { desc = "Move Up" })
-map("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move Down", silent = true })
-map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move Up", silent = true })
+map("n", "<C-J>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+map("n", "<C-K>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+map("v", "<C-J>", ":m '>+1<cr>gv=gv", { desc = "Move Down", silent = true })
+map("v", "<C-K>", ":m '<-2<cr>gv=gv", { desc = "Move Up", silent = true })
 
 -- Center on page up/down
 map("n", "<C-d>", "<C-d>zz", { noremap = true })
