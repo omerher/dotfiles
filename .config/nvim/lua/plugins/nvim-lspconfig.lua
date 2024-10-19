@@ -1,9 +1,22 @@
--- LSP keymaps
 return {
-  "neovim/nvim-lspconfig",
-  opts = function()
-    local keys = require("lazyvim.plugins.lsp.keymaps").get()
-    -- disable a keymap
-    keys[#keys + 1] = { "<C-k>", mode = { "i" }, false }
-  end,
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                pycodestyle = {
+                  enabled = true,
+                  maxLineLength = 100,
+                  ignore = {},
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 }
