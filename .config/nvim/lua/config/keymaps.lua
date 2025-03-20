@@ -6,6 +6,7 @@ local map = vim.keymap.set
 local del = vim.keymap.del
 local wk = require("which-key")
 
+map("n", "<Left>", "h", { noremap = true })
 -- Move text more effeciently
 map("n", "<C-J>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
 map("n", "<C-K>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
