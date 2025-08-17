@@ -77,6 +77,7 @@ alias lg="lazygit"
 # ---- path ----
 export PATH="$PATH:/$HOME/.local/bin"
 export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/usr/local/go/bin"
 
 
 # ---- zoxide ----
@@ -159,6 +160,10 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 export BAT_THEME="Catppuccin Mocha"
 alias cat="bat"
 
+
+# ---- atuin ----
+source "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh --disable-up-arrow)"
 
 # ---- misc ----
 bindkey '^ ' autosuggest-accept
